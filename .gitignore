@@ -1,34 +1,47 @@
-# Environment and cache
-.env
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
 .Python
-env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
 venv/
-.venv
-.env.local
+ENV/
+env/
+.env
 
-# Chroma DB files
-chroma_db/
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# IDE specific files
+# IDE
 .idea/
 .vscode/
 *.swp
 *.swo
 
-# Distribution / packaging
-dist/
-build/
-*.egg-info/
+# Streamlit
+.streamlit/
 
-# Streamlit specific
-.streamlit/secrets.toml
+# OS
+.DS_Store
+Thumbs.db
 
-# Logs
-*.log
+# Project specific
+*.pdf
+*.docx
+*.pptx
+*.ppt
+faiss_index/
