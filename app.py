@@ -169,7 +169,8 @@ def main():
 
     initialize_session_state()
     
-    st.sidebar.header("Configuration")
+    #st.sidebar.header("Configuration")
+    st.sidebar.markdown("<h3 style='color: white;'>Configuration</h3>", unsafe_allow_html=True)
     api_key = st.sidebar.text_input(
         "Enter Google API Key",
         value=st.session_state.api_key,
