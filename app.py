@@ -171,26 +171,52 @@ def main():
     
     #st.sidebar.header("Configuration")
     st.sidebar.markdown("<h3 style='color: white;'>Configuration</h3>", unsafe_allow_html=True)
+
     api_key = st.sidebar.text_input(
-        "Enter Google API Key",
+        label="Enter Google API Key",
         value=st.session_state.api_key,
         type="password",
-        key="api_key_input"
+        key="api_key_input",
+        label_visibility="visible",
+        help="Enter your Google API key here"
     )
-    
-    
+
+    st.markdown(
+        """
+        <style>
+        [data-testid="stTextInput"] label {
+            color: white !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
     if api_key:
         st.session_state.api_key = api_key
         os.environ["GOOGLE_API_KEY"] = api_key
         genai.configure(api_key=api_key)
     
+    st.sidebar.markdown("<h3 style='color: white;'>Upload Documents</h3>", unsafe_allow_html=True)
+    
     # File upload
-    st.sidebar.header("Upload Documents")
     uploaded_files = st.sidebar.file_uploader(
         "Upload your documents",
         type=['pdf', 'docx', 'pptx', 'ppt'],
         accept_multiple_files=True,
-        help="Upload PDF, Word, or PowerPoint files"
+        help="Upload PDF, Word, or PowerPoint files",
+        label_visibility="visible"
+    )
+
+    st.markdown(
+        """
+        <style>
+        [data-testid="stFileUploader"] label {
+            color: white !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
     )
 
     if uploaded_files and api_key and st.sidebar.button("Process Documents", type="primary"):
