@@ -162,14 +162,38 @@ def initialize_session_state():
         st.session_state.api_key = os.getenv('GOOGLE_API_KEY', '')
 
 def main():
+    # Add custom CSS to style the sidebar
+    st.markdown("""
+        <style>
+        [data-testid="stSidebar"] {
+            background-color: #CB3846;
+        }
+        [data-testid="stSidebar"] .st-emotion-cache-16idsys p,
+        [data-testid="stSidebar"] .st-emotion-cache-16idsys span,
+        [data-testid="stSidebar"] .st-emotion-cache-16idsys div,
+        [data-testid="stSidebar"] .st-emotion-cache-16idsys label,
+        [data-testid="stSidebar"] h1,
+        [data-testid="stSidebar"] h2,
+        [data-testid="stSidebar"] h3 {
+            color: white !important;
+        }
+        [data-testid="stSidebar"] .stButton button {
+            background-color: white;
+            color: #CB3846;
+            border: none;
+            font-weight: bold;
+        }
+        [data-testid="stSidebar"] .stButton button:hover {
+            background-color: #f0f0f0;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
     st.set_page_config(page_title="FolderFlow QA Assistant", page_icon="📚")
-    #st.title("FolderFlow for HILTI Technologies")
-    #st.markdown("<h1>FolderFlow for <span style='color: red;'>HILTI</span> Technologies</h1>", unsafe_allow_html=True)
     st.markdown("<h1>FolderFlow for <span style='color: #D00F22; font-weight: bold; font-size: 50px;'>HILTI</span> Technologies</h1>", unsafe_allow_html=True)
     
     initialize_session_state()
-
-    # API key input in sidebar with persistence
+    # Rest of your code remains the same...
     st.sidebar.header("Configuration")
     api_key = st.sidebar.text_input(
         "Enter Google API Key",
@@ -177,6 +201,7 @@ def main():
         type="password",
         key="api_key_input"
     )
+    
     
     if api_key:
         st.session_state.api_key = api_key
