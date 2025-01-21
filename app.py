@@ -220,14 +220,49 @@ def main():
     )
 
     if uploaded_files and api_key and st.sidebar.button("Process Documents", type="primary"):
-        with st.spinner("Processing documents..."):
-            manager = DocumentManager()
-            if manager.setup_qa_system(uploaded_files):
-                st.session_state.manager = manager
-                st.session_state.system_ready = True
-                st.sidebar.success("✅ Documents processed successfully!")
-            else:
-                st.sidebar.error("❌ Setup failed. Please try again.")
+    with st.spinner("Processing documents..."):
+        manager = DocumentManager()
+        if manager.setup_qa_system(uploaded_files):
+            st.session_state.manager = manager
+            st.session_state.system_ready = True
+            # Option 1: Custom styled success message with bright colors
+            st.sidebar.markdown("""
+                <div style='background-color: #1aff1a; 
+                            color: #000000;
+                            padding: 10px;
+                            border-radius: 5px;
+                            font-weight: bold;'>
+                    ✅ Documents processed successfully!
+                </div>
+                """, 
+                unsafe_allow_html=True
+            )
+            
+            # Or Option 2: White background with green text
+            #st.sidebar.markdown("""
+                #<div style='background-color: white; 
+                            #color: #00b300;
+                            #padding: 10px;
+                            #border-radius: 5px;
+                            #font-weight: bold;'>
+                    #✅ Documents processed successfully!
+                #</div>
+                #""", 
+                #unsafe_allow_html=True
+            #)
+        else:
+            # Error message with better visibility
+            st.sidebar.markdown("""
+                <div style='background-color: #ffcccc; 
+                            color: #cc0000;
+                            padding: 10px;
+                            border-radius: 5px;
+                            font-weight: bold;'>
+                    ❌ Setup failed. Please try again.
+                </div>
+                """, 
+                unsafe_allow_html=True
+            )
 
     # Display processed files in sidebar
     if st.session_state.system_ready and st.session_state.manager.processed_files:
